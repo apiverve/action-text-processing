@@ -2,9 +2,7 @@
 
 > Translate text, summarize content, and paraphrase documents
 
-> **Beta Release** - This action is in beta. We'd love your feedback! [Open an issue](https://github.com/apiverve/action-text-processing/issues) if you encounter any problems.
-
-[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Text Processing-blue?logo=github)](https://github.com/marketplace/actions/apiverve-text-processing)
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Text_Processing-blue?logo=github)](https://github.com/apiverve/action-text-processing)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **[Browse All APIs](https://apiverve.com/marketplace?utm_source=github&utm_medium=action&utm_campaign=text-processing)** | **[Get Free API Key](https://dashboard.apiverve.com/signup?utm_source=github&utm_medium=action&utm_campaign=text-processing)** | **[Documentation](https://docs.apiverve.com?utm_source=github&utm_medium=action&utm_campaign=text-processing)**
@@ -24,11 +22,11 @@ This action provides access to APIVerve's Text Processing APIs directly in your 
 
 | API | Description |
 |-----|-------------|
-| `translator` | Translator is a simple tool for translating text. It returns the translated text. |
-| `textsummarizer` | Text Summarizer is a simple tool for summarizing text. It returns a summary of the text. |
-| `paraphrase` | Paraphrase is a tool for rewriting text while preserving its original meaning. It helps create alternative versions of content for various purposes. |
-| `keywordextractor` | Keyword Extractor is a simple tool for extracting keywords from a web page. It returns the keywords and the frequency of each keyword. |
-| `languagedetector` | Language Detector is a simple tool for detecting the language of a text. It returns the language code and the confidence level. |
+| `translator` | Translator translates written text into target languages using standard language codes. Submit any string with a target language code to receive the translated text and the confirmed or auto-detected source language. |
+| `textsummarizer` | Text Summarizer condenses raw text into concise summaries of a specified sentence count. Pass up to 5,000 characters to extract key points into readable summaries, with paid plans adding word counts and reduction metrics. |
+| `paraphrase` | paraphrase API |
+| `keywordextractor` | Keyword Extractor scans raw text or live webpage URLs to extract key terms and their frequencies. It returns up to 50 unique keywords, occurrence counts, total keyword volume, and the top five terms with their percentage share. |
+| `languagedetector` | Language Detector identifies the language of any submitted text string. It returns the primary language, its ISO 639-1 code, and candidate matches ranked by confidence scores. |
 
 ---
 
@@ -40,7 +38,7 @@ This action provides access to APIVerve's Text Processing APIs directly in your 
   with:
     api_key: ${{ secrets.APIVERVE_KEY }}
     api: translator
-    params: '{&quot;text&quot;: &quot;Hello world&quot;, &quot;target&quot;: &quot;es&quot;}'
+    params: '{"text": "Hello world", "target": "es"}'
 ```
 
 ---
@@ -81,7 +79,6 @@ Go to your repository **Settings** → **Secrets and variables** → **Actions**
 | `output_file` | Path to save binary output (images, PDFs) | No | - |
 | `format` | Response format: `json`, `yaml`, or `xml` | No | `json` |
 | `fail_on_error` | Fail workflow if API returns error | No | `true` |
-
 *\*API key is required but can be provided via input OR `APIVERVE_API_KEY` / `APIVERVE_KEY` environment variable.*
 
 ## Outputs
@@ -92,7 +89,6 @@ Go to your repository **Settings** → **Secrets and variables** → **Actions**
 | `data` | The `data` field from response as JSON |
 | `status` | API status (`ok` or `error`) |
 | `file` | Path to downloaded file (if `output_file` was used) |
-
 ---
 
 ## Examples
@@ -108,7 +104,7 @@ Translate text to another language
   with:
     api_key: ${{ secrets.APIVERVE_KEY }}
     api: translator
-    params: '{&quot;text&quot;: &quot;Hello world&quot;, &quot;target&quot;: &quot;es&quot;}'
+    params: '{"text": "Hello world", "target": "es"}'
 
 - name: Use result
   run: echo "Result: ${{ steps.text-processing-0.outputs.data }}"
@@ -125,7 +121,7 @@ Summarize long text
   with:
     api_key: ${{ secrets.APIVERVE_KEY }}
     api: textsummarizer
-    params: '{&quot;text&quot;: &quot;Your long text here...&quot;}'
+    params: '{"text": "Your long text here..."}'
 
 - name: Use result
   run: echo "Result: ${{ steps.text-processing-1.outputs.data }}"
@@ -156,7 +152,7 @@ jobs:
         with:
           api_key: ${{ secrets.APIVERVE_KEY }}
           api: translator
-          params: '{&quot;text&quot;: &quot;Hello world&quot;, &quot;target&quot;: &quot;es&quot;}'
+          params: '{"text": "Hello world", "target": "es"}'
 
       - name: Show result
         run: |

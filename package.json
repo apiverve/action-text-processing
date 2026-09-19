@@ -1,6 +1,6 @@
 {
   "name": "@apiverve/action-text-processing",
-  "version": "0.1.0-beta",
+  "version": "1.0.0",
   "description": "Translate text, summarize content, and paraphrase documents",
   "main": "dist/index.js",
   "scripts": {
